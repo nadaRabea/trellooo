@@ -56,3 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Devise gem for auth
 gem 'devise_token_auth'
 gem 'rack-cors', require: 'rack/cors'
+
+# JSON builder
+gem 'jbuilder'
