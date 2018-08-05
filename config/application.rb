@@ -39,5 +39,8 @@ module Trellooo
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    # Load lib directory
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
