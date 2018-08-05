@@ -23,3 +23,6 @@
 
 # Ignore local env file
 /config/local_env.yml
+
+# Ignore coverage of rspec
+coverage
