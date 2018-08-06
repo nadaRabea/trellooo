@@ -3,7 +3,12 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'User', at: 'auth'  
 
     get 'users' => 'users#index' 
-    
-    resources :lists   
+
+    resources :lists do
+      member do
+        post 'assign_member'
+        post 'unassign_member'
+      end
+    end   
   end
 end
