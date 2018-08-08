@@ -59,3 +59,6 @@ gem 'rack-cors', require: 'rack/cors'
 
 # JSON builder
 gem 'jbuilder'
+
+# pagination
+gem 'will_paginate'
