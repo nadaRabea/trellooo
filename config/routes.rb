@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post 'assign_member'
         post 'unassign_member'
       end
+      resources :cards      
     end   
   end
 end
