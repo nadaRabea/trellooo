@@ -1,7 +1,8 @@
 class V1::CardsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_card, only: [:update, :destroy]
-  before_action :set_list, only: [:index, :show, :create]
+  before_action :set_list, only: [:index, :show]
 
   def index
     @cards = @list.cards.find_by(user_id: current_user)
@@ -12,7 +13,7 @@ class V1::CardsController < ApplicationController
   end
 
   def create
-    @card = @list.cards.create(card_params)
+    @card = Card.create(card_params)
     @card.user = current_user
 
     if @card.save
@@ -37,14 +38,14 @@ class V1::CardsController < ApplicationController
   private
   
     def set_card
-      @card = current_user.cards.find(params[:id])
+      @card = Card.find(params[:id])
     end
 
     def card_params
-      params.permit(:title, :description)
+      params.permit(:title, :description,:list_id)
     end
 
     def set_list
-      @list = current_user.lists.find(params[:list_id])      
+      @list = List.find(params[:list_id])      
     end
 end

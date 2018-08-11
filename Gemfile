@@ -62,3 +62,6 @@ gem 'jbuilder'
 
 # pagination
 gem 'will_paginate'
+
+# Cancancan gem for authorization
+gem 'cancancan'

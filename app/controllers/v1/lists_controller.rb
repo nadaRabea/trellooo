@@ -1,10 +1,16 @@
 class V1::ListsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
   before_action :set_list, only: [:show, :update, :destroy, :assign_member, :unassign_member]
   before_action :set_user, only: [:assign_member, :unassign_member]
 
   def index
-    @lists = current_user.lists
+    # @lists = List.accessible_by(current_ability)
+    if current_user.admin?
+      @lists = List.all
+    else
+      @lists = List.find_user_lists(current_user.id)
+    end
   end
 
   def show
