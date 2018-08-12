@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version
+This application requires:
+Ruby 2.3.1
+Rails 5.2.0
 
-Things you may want to cover:
+Database
+you should make file (local_env.yml) for  env variables of database and there is file example in 
+config/local_env.yml.example 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
