@@ -5,11 +5,11 @@ class V1::CardsController < ApplicationController
   before_action :set_list, only: [:index, :show]
 
   def index
-    @cards = @list.cards.find_by(user_id: current_user)
+    @cards = @list.cards.order_cards_by_comments.where(user: current_user)
   end
 
   def show
-    @card = @list.cards.find(params[:id])
+    @card = @list.cards.includes(:comments).limit(3).find_by(id: params[:id])
   end
 
   def create
@@ -42,7 +42,7 @@ class V1::CardsController < ApplicationController
     end
 
     def card_params
-      params.permit(:title, :description,:list_id)
+      params.permit(:title, :description, :list_id)
     end
 
     def set_list
