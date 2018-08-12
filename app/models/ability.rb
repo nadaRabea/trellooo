@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     if user.admin?
-      can [:read], List , :all
 
       # Can create and read lists,
       can [:create, :read], List
@@ -28,9 +27,13 @@ class Ability
       # Can update/remove his own comments and any other comment on
       # his own lists,
       can [:update, :destroy], Comment do |comment|
-        comment.user == user || comment.commentable.list.creator == user || comment.commentable.commentable.list.creator == user
+        if comment.commentable_type == 'Card'
+          comment.user == user || comment.commentable.list.creator == user
+        else
+          comment.user == user || comment.commentable.commentable.list.creator == user
+        end
       end
-      
+            
     else
       # can access only lists assigned to member
       can :read, List  do |list|
@@ -50,10 +53,16 @@ class Ability
         card.user == user
       end
 
+      # Can create a comment on his lists, can read all comments on his lists
       can [:create, :read], Comment do |comment| 
-        comment.commentable.list.users.include? user || comment.commentable.commentable.list.users.include? user
+        if comment.commentable_type == 'Card'
+          comment.commentable.list.users.include? user
+        else
+          comment.commentable.commentable.list.users.include? user
+        end        
       end
 
+      # can update/remove his own comments
       can [:update, :destroy], Comment do |comment|
         comment.user == user
       end

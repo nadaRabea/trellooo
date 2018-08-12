@@ -24,7 +24,7 @@ class V1::CardsController < ApplicationController
   end
 
   def update
-    if @card.update(card_params)
+    if @card.update(update_params)
       render :show, status: :ok
     else
       render json: @card.errors, status: :unprocessable_entity
@@ -43,6 +43,10 @@ class V1::CardsController < ApplicationController
 
     def card_params
       params.permit(:title, :description, :list_id)
+    end
+
+    def update_params
+      params.permit(:title, :description)      
     end
 
     def set_list
